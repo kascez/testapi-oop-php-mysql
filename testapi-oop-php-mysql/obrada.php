@@ -25,7 +25,7 @@
         //domaci
         //Ubacivanje nove kategorije
         }elseif($_POST["kategorija_naziv"] != null) {
-            $naziv = $_POST["kategorija_naziv"]
+            $naziv = $_POST["kategorija_naziv"];
             if ($mydb->insert("kategorije", "naziv", [$naziv])) {
                 echo "kategorija ubacena";
             } else {
@@ -35,7 +35,7 @@
             exit();
         //Update kategorije
         } elseif($_POST["kategorija_id"] != null && $_POST["kategorija_naziv_put"] != null) {
-            $naziv = $_POST["kategorija_naziv_put"]
+            $naziv = $_POST["kategorija_naziv_put"];
             if ($mydb->update("kategorije", $_POST["kategorija_id"], "naziv", [$naziv])) {
                 echo "kategorija je izmjenjena";
             } else {
@@ -46,7 +46,7 @@
         //Update novosti
         } elseif($_POST["novosti_id"] != null && $_POST["naslov_novosti_put"] != null && $_POST["tekst_novosti_put"] != null && $_POST["kategorija_odabir_put"] != null) {
             $niz = ["naslov"=> "'".$_POST["naslov_novosti_put"]."'", "tekst"=>"'".$_POST["tekst_novosti_put"]."'", "datumvreme"=>"NOW()", "kategorija_id"=>$_POST["kategorija_odabir_put"]];
-            if (mydb->update("novosti", "naslov, tekst, datumvreme, kategorija_id")) {
+            if ($mydb->update("novosti", "novosti_id", "naslov, tekst, datumvreme, kategorija_id", $niz)) {
                 echo "novost je izmjenjena";
             } else {
                 echo "novost nije izmjenjena";
@@ -55,8 +55,8 @@
             exit();
         //Prikaz svih vrijednosti tabele nezavisno od toga da li je novosti ili kategorije
         } else {
-            $tabela = $_POST["odabir_tabele"]
-            if (mydb->select($tabela, *, null, null, null)) {
+            $tabela = $_POST["odabir_tabele"];
+            if ($mydb->select($tabela, "*", null, null, null)) {
                 echo "tabela je prikazana";
             } else {
                 echo "tabela nije prikazana";
